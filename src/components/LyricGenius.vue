@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-full bg-white flex flex-col">
-    <MainBar title="Trivia Master"/>
+    <MainBar title="Lyric Genius"/>
 
     <div v-if="currQuestionI == -1" class="w-full h-full flex-1"
          :style="{ backgroundImage: `url(${titlecover})`, backgroundSize: 'cover', backgroundPosition: 'center'}">

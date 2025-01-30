@@ -138,6 +138,7 @@ function onConfirm() {
       showLockDialog.value = false;
       localStorage.setItem(menus.value[currI.value].title, "shaba");
       errorAudio.src = goodsfx;
+      console.log("nan")
       errorAudio.play()
     } else {
       errorAudio.src = errorsfx;
