@@ -1,23 +1,23 @@
 <template>
   <div class="fixed left-0 top-0">
     <div class="relative overflow-hidden">
-      <img :src="ipod" alt="ipod" class="w-screen top-0"/>
+      <img :src="ipod" alt="ipod" class="top-0 w-screen max-w-[430px]"/>
       <div
-          class="w-[336px] h-[253px] left-[40px] top-[32px] bg-red-200 z-10 absolute left-0 top-0 rounded-xs">
+          class="w-[81.5%] max-w-[430px] h-[36.6%] left-[9.5%] top-[4.5%] bg-red-200 z-10 absolute left-0 top-0 rounded-lg">
         <component :is="menus[currMenu]"/>
       </div>
 
-      <div class="absolute bottom-[12%] w-[63%] h-[36.3%] bg-red-200 left-[19%] opacity-50">
+      <div class="absolute bottom-[12%] w-[63%] h-[36.3%] left-[19%] opacity-50">
         <div class="w-full h-full relative">
-          <button class="bg-green-200 w-[50%] h-[31%] left-[25%] absolute top-0 touch-none"
+          <button class="w-[50%] h-[31%] left-[25%] absolute top-0 touch-none"
                   @click="emitter.emit('menu')"/>
-          <button class="bg-yellow-200 w-[50%] h-[31%] left-[25%] bottom-0 absolute touch-none"
+          <button class="w-[50%] h-[31%] left-[25%] bottom-0 absolute touch-none"
                   @click="emitter.emit('pauseplay')"/>
-          <button class="bg-blue-200 w-[31%] h-[35%] left-[0] top-[32%] absolute touch-none"
+          <button class=" w-[31%] h-[35%] left-[0] top-[32%] absolute touch-none"
                   @click="emitter.emit('up')"/>
-          <button class="bg-purple-200 w-[31%] h-[35%] left-[69%] top-[32%] absolute touch-none"
+          <button class="w-[31%] h-[35%] left-[69%] top-[32%] absolute touch-none"
                   @click="emitter.emit('down')"/>
-          <button class="bg-black w-[35%] h-[36%] left-[32.5%] top-[32%] absolute touch-none"
+          <button class="w-[35%] h-[36%] left-[32.5%] top-[32%] absolute touch-none"
                   @click="emitter.emit('confirm')"/>
         </div>
       </div>
@@ -46,13 +46,27 @@ import song7 from "@/assets/songs/7.mp3";
 import song8 from "@/assets/songs/8.mp3";
 import song9 from "@/assets/songs/9.mp3";
 import secretsong from "@/assets/songs/music_secret.mp4";
+import IntroMenu from "@/components/IntroMenu.vue";
+import ExtrasMenu from "@/components/ExtrasMenu.vue";
+import MessagesMenu from "@/components/MessagesMenu.vue";
+import FinalPage from "@/components/FinalPage.vue";
 
-const menus = {"main": MainMenu, "music": MusicMenu, "pictures": PhotoMenu, "videos": VideoMenu, "games": GamesMenu};
-const currMenu = ref("main")
+const menus: any = {
+  "main": MainMenu,
+  "music": MusicMenu,
+  "pictures": PhotoMenu,
+  "videos": VideoMenu,
+  "games": GamesMenu,
+  "intro": IntroMenu,
+  "extras": ExtrasMenu,
+  "messages": MessagesMenu,
+  "final": FinalPage
+};
+const currMenu = ref(localStorage.getItem("intro") ? "main" : "intro");
 
 const songs = [song1, song2, song3, song4, song5, song6, secretsong, song7, song8, song9];
 
-function changeMenu(menu: string) {
+function changeMenu(menu: any) {
   currMenu.value = menu;
 }
 
@@ -64,7 +78,7 @@ function pausePlay() {
 const audio = new Audio('');
 
 emitter.on("changeMenu", changeMenu);
-emitter.on("playSong", (song: number) => {
+emitter.on("playSong", (song: any) => {
   audio.pause();
   const matchingSong = songs[song];
   audio.src = matchingSong;

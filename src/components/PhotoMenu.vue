@@ -34,16 +34,17 @@ import img14 from "@/assets/pictures/14.jpeg"
 import img15 from "@/assets/pictures/15.jpeg"
 import img16 from "@/assets/pictures/16.jpeg"
 import img17 from "@/assets/pictures/17.jpeg"
+import hint from "@/assets/pictures/hintimage.jpeg"
 import 'swiper/css';
 import {register} from 'swiper/element/bundle';
 import {onMounted, onUnmounted, ref} from "vue";
 import {emitter} from "@/config.ts";
 
-const images = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img14, img15, img16, img17];
+const images = [img1, img2, img3, img4, img5, img6, img7, hint, img8, img9, img10, img11, img12, img13, img14, img15, img16, img17];
 const currI = ref(0);
 register();
 
-const onSlideChange = (e) => {
+const onSlideChange = (e: any) => {
   if (swiper.value) currI.value = swiper.value.swiper.activeIndex;
 }
 

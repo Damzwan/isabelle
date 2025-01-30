@@ -65,7 +65,12 @@ import MainBar from "@/components/MainBar.vue";
 
 const showLockDialog = ref(false);
 const lockText = ref("");
+import errorsfx from "@/assets/error.m4a"
+import goodsfx from "@/assets/reallygood.m4a"
+
 const dialogIndex = ref(1);
+
+const errorAudio = new Audio(errorsfx);
 
 const menus = ref([
   {title: "Music", locked: false},
@@ -79,7 +84,8 @@ const menus = ref([
   },
   {
     title: "Games", locked: !localStorage.getItem("Games"), question: "In the harbor’s glow, where music’s stacked,\n" +
-        "Who rocks the scene with rhythm packed?", answer: "boysattheback"
+        "What’s the word, both bold and cheeky,\n" +
+        "That fits this egg, so small and sneaky?", answer: "sassy"
   },
   {
     title: "Messages",
@@ -131,8 +137,11 @@ function onConfirm() {
       menus.value[currI.value].locked = false;
       showLockDialog.value = false;
       localStorage.setItem(menus.value[currI.value].title, "shaba");
+      errorAudio.src = goodsfx;
+      errorAudio.play()
     } else {
-
+      errorAudio.src = errorsfx;
+      errorAudio.play()
     }
     dialogIndex.value = 1;
     dialogAnswer.value = "";

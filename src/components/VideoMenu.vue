@@ -26,7 +26,7 @@
 
         </swiper-container>
 
-        <p class="text-xl font-bold text-center pt-4">{{ videos[currI].text }}</p>
+        <p class="text-xl font-bold text-center pt-3">{{ videos[currI].text }}</p>
 
       </div>
     </div>
@@ -54,6 +54,7 @@ import cover3 from "@/assets/videos/3.png"
 import cover4 from "@/assets/videos/4.png"
 import cover5 from "@/assets/videos/5.png"
 import cover6 from "@/assets/videos/6.png"
+import coverhint from "@/assets/videos/videohint_cover.png"
 
 import video1 from "@/assets/videos/1.mp4"
 import video2 from "@/assets/videos/2.mp4"
@@ -61,32 +62,39 @@ import video3 from "@/assets/videos/3.mp4"
 import video4 from "@/assets/videos/4.mp4"
 import video5 from "@/assets/videos/5.mp4"
 import video6 from "@/assets/videos/6.mp4"
+import videohint from "@/assets/videos/videohint.mp4"
 
 
 const isShowingVideo = ref(false)
 const video = ref<HTMLVideoElement | undefined>()
 
-const videos = [{text: "Wow sexy time", cover: cover1, video: video1}, {
-  text: "The beginning",
+const videos = [{text: "Geese are scary", cover: cover1, video: video1}, {
+  text: "Facing your fears",
   cover: cover2,
   video: video2
 }, {
-  text: "Sexy sexy time",
+  text: "Vivid tunnels",
   cover: cover3,
   video: video3
 }, {
-  text: "Me being stupid",
+  text: "Trying to eat vegetables",
   cover: cover4,
   video: video4
-}, {
-  text: "Me being stupid",
-  cover: cover5,
-  video: video5
-}, {
-  text: "Me being stupid",
-  cover: cover6,
-  video: video6
-}];
+},
+  {
+    text: "???",
+    cover: coverhint,
+    video: videohint
+  },
+  {
+    text: "Lasting Impressions",
+    cover: cover5,
+    video: video5
+  }, {
+    text: "Annoying Isabelle",
+    cover: cover6,
+    video: video6
+  }];
 const currI = ref(0);
 register();
 
@@ -110,28 +118,26 @@ function onUp() {
 }
 
 function onConfirm() {
-  if (!isShowingVideo.value){
+  if (!isShowingVideo.value) {
     emitter.emit("pauseaudio")
 
     video.value!.src = videos[currI.value].video;
     video.value!.play();
     isShowingVideo.value = true;
-  }
-  else {
+  } else {
     video.value!.paused ? video.value!.play() : video.value!.pause();
   }
 }
 
-function pausePlayVideo(){
+function pausePlayVideo() {
   if (!isShowingVideo.value) return;
   video.value!.paused ? video.value!.play() : video.value!.pause();
 }
 
-function onMenu(){
-  if (!isShowingVideo.value){
+function onMenu() {
+  if (!isShowingVideo.value) {
     emitter.emit("changeMenu", "main")
-  }
-  else {
+  } else {
     video.value!.pause();
     isShowingVideo.value = false;
   }
