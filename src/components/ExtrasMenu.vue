@@ -31,8 +31,8 @@ import extravideo from "@/assets/extras/extra.mp4"
 const currI = ref(0)
 const items = ["Weird ass video", "Super secret extra 😈"]
 const selectedItem = ref(-1)
-let interval;
-let typed;
+let interval: any;
+let typed: any;
 
 function onDown() {
   const newI = currI.value + 1;
@@ -103,7 +103,7 @@ function onConfirm() {
       showCursor: false,
     });
     interval = setInterval(function () {
-      let container = document.getElementById('container');
+      let container = document.getElementById('container') as any;
       container.scrollTop = container.scrollHeight; // Auto-scroll to the bottom
     }, 1000)
   }
