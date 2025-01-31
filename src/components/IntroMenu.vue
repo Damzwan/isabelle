@@ -33,7 +33,7 @@
             i = 1
             onConfirm()
           }">
-          <video :src="introvideo" class="h-[95%] absolute" :class="{'brightness-50': i == 1 && paused}" ref="video"/>
+          <video :src="introvideo" class="h-[95%] absolute" :class="{'brightness-50': i == 1 && paused}" ref="video" :poster="thumbnail"/>
           <div v-if="i == 1 && paused" class="absolute left-0 top-0 w-full h-full flex justify-center items-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                  stroke="currentColor" class="size-22 fill-white">
@@ -54,6 +54,7 @@
 import introvideo from "@/assets/intro/intro.mp4"
 import applelogo from "@/assets/intro/apple_logo.svg"
 import errorsfx from "@/assets/error.m4a"
+import thumbnail from "@/assets/intro/thumbnail.png"
 import {onMounted, onUnmounted, ref} from "vue";
 import {emitter} from "@/config.ts";
 import MainBar from "@/components/MainBar.vue";

@@ -95,7 +95,7 @@ import IntroMenu from "@/components/IntroMenu.vue";
 import ExtrasMenu from "@/components/ExtrasMenu.vue";
 import MessagesMenu from "@/components/MessagesMenu.vue";
 import FinalPage from "@/components/FinalPage.vue";
-import {musicPlaying, musicPlayingIndex, musicPlayingTitle} from "@/store.ts";
+import {musicPlaying, musicPlayingTitle} from "@/store.ts";
 
 const menus: any = {
   "main": MainMenu,

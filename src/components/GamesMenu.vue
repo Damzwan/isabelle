@@ -11,7 +11,7 @@
 
       </div>
       <div class="w-full h-full">
-        <img :src="nirvana" alt="" class="h-full">
+        <img :src="nirvana" alt="" class="h-full w-full object-cover">
       </div>
     </div>
   </div>

@@ -111,7 +111,7 @@ function onConfirm() {
 
 function onMenu() {
   clearInterval(interval);
-  typed.destroy()
+  typed?.destroy()
   if (selectedItem.value === -1) {
     emitter.emit("changeMenu", "main");
   } else selectedItem.value = -1
