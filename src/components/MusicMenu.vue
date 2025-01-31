@@ -12,13 +12,22 @@
         <swiper-slide v-for="(item, i) in songs">
           <img :src="item.cover" :alt="`song-${i}`" class="object-fill w-40 h-40"
                :class="{'brightness-50': i === currI}">
-          <div v-if="i == currI" class="absolute left-0 top-0 w-full h-full flex justify-center items-center">
+          <div v-if="i == currI && (!musicPlaying || (musicPlaying && musicPlayingTitle!=item.text))"
+               class="absolute left-0 top-0 w-full h-full flex justify-center items-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                  stroke="currentColor" class="size-22 fill-white">
               <path stroke-linecap="round" stroke-linejoin="round"
                     d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z"/>
             </svg>
           </div>
+          <div v-else-if="i === currI"
+               class="absolute left-0 top-0 w-full h-full flex justify-center items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="#3dadcd" viewBox="0 0 24 24" stroke-width="1.5"
+                 stroke="currentColor"  class="size-22 fill-white stroke-white">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25v13.5m-7.5-13.5v13.5"/>
+            </svg>
+          </div>
+
         </swiper-slide>
 
       </swiper-container>
@@ -47,6 +56,7 @@ import cover7 from "@/assets/songs/cover7.jpg"
 import cover8 from "@/assets/songs/cover8.jpg"
 import cover9 from "@/assets/songs/cover9.jpg"
 import secret_cover from "@/assets/songs/cover_secret.jpg"
+import {musicPlaying, musicPlayingTitle} from "@/store.ts";
 
 
 const songs = [{text: "Rich baby daddy", cover: cover1}, {
@@ -103,7 +113,14 @@ function onMenu() {
 }
 
 function onConfirm() {
-  emitter.emit("playSong", currI.value);
+  if (musicPlayingTitle.value == songs[currI.value].text){
+    emitter.emit("pauseplay", currI.value);
+
+  }
+  else{
+    musicPlayingTitle.value = songs[currI.value].text;
+    emitter.emit("playSong", currI.value);
+  }
 }
 
 onMounted(() => {

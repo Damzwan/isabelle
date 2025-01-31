@@ -1,4 +1,3 @@
-
 <template>
   <div class="w-full h-full bg-white flex flex-col">
     <MainBar title="Messages"/>
@@ -17,13 +16,15 @@ import MenuItem from "@/components/MenuItem.vue";
 import message1 from "@/assets/messages/1.mp4"
 import message2 from "@/assets/messages/2.mp4"
 import message3 from "@/assets/messages/3.mp4"
-import messagehint from "@/assets/messages/messageshint.mp4"
-import Typed from "typed.js";
+import message4 from "@/assets/messages/4.mp4"
 import {emitter} from "@/config.ts";
 
 const currI = ref(0)
 const audio = new Audio();
-const messages = [{text: "Message1.mp3", audio: message1}, {text: "Message2.mp3", audio: message2}, {text: "Message3.mp3", audio: message3}]
+const messages = [{text: "Message1.mp3", audio: message1}, {
+  text: "Message2.mp3",
+  audio: message2
+}, {text: "Message3.mp3", audio: message3}, {text: "Message4.mp3", audio: message4}];
 
 function onDown() {
   const newI = currI.value + 1;

@@ -9,8 +9,8 @@
       </div>
 
     </div>
-    <div class="w-full h-full">
-      <img :src="nirvana" alt="" class="h-full">
+    <div class="w-full h-full relative">
+      <img :src="nirvana" alt="" class="h-full" />
     </div>
 
     <!-- Dark Background Overlay -->
@@ -36,12 +36,20 @@
         <!-- Actions -->
         <div class="flex justify-between space-x-2">
           <button
+              @click="() => {
+                dialogIndex = 0
+                onConfirm()
+              }"
               class="px-4 py-2 w-full text-sm font-medium rounded-md"
               :class="{'text-gray-600 bg-gray-100': dialogIndex == 1, 'text-white bg-blue-600': dialogIndex == 0}"
           >
             Cancel
           </button>
           <button
+              @click="() => {
+                dialogIndex = 1
+                onConfirm()
+              }"
               class="px-4 py-2 w-full text-sm font-medium bg-blue-600 rounded-md"
               :class="{'text-gray-600 bg-gray-100': dialogIndex == 0, 'text-white bg-blue-600': dialogIndex == 1}"
           >
@@ -84,8 +92,7 @@ const menus = ref([
   },
   {
     title: "Games", locked: !localStorage.getItem("Games"), question: "In the harbor’s glow, where music’s stacked,\n" +
-        "What’s the word, both bold and cheeky,\n" +
-        "That fits this egg, so small and sneaky?", answer: "sassy"
+        "Who rocks the scene with rhythm packed?", answer: "boysattheback"
   },
   {
     title: "Messages",
@@ -99,10 +106,10 @@ const menus = ref([
     answer: "norman"
   },
   {
-    title: "Final", locked: !localStorage.getItem("Final"), question: "Scatter the pieces, a picture to find,\n" +
-        "A puzzle of fragments, your hands must bind.\n" +
-        "But the truth you seek lies not in the art,\n" +
-        "Flip it around to reveal the heart.", answer: "gracie"
+    title: "Final", locked: !localStorage.getItem("Final"), question: "Scattered pieces, a tangled view,\n" +
+        "Fit them right to find the clue.\n" +
+        "A name that hints at what you do—\n" +
+        "What’s the puzzle calling you?", answer: "gracie"
   }
 ]);
 const currI = ref(0);

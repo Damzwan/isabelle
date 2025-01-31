@@ -18,6 +18,10 @@
               placeholder="Type your answer here..."
           />
           <button
+              @click="() => {
+                i = 0
+                onConfirm()
+              }"
               class="px-4 py-2 text-sm font-medium bg-blue-600 rounded-md"
               :class="{'text-gray-600 bg-gray-100': i == 1, 'text-white bg-blue-600': i == 0}"
           >
@@ -25,7 +29,10 @@
           </button>
         </div>
 
-        <div class="w-full h-full flex justify-center items-center bg-white relative">
+        <div class="w-full h-full flex justify-center items-center bg-white relative" @click="() => {
+            i = 1
+            onConfirm()
+          }">
           <video :src="introvideo" class="h-[95%] absolute" :class="{'brightness-50': i == 1 && paused}" ref="video"/>
           <div v-if="i == 1 && paused" class="absolute left-0 top-0 w-full h-full flex justify-center items-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -51,10 +58,11 @@ import {onMounted, onUnmounted, ref} from "vue";
 import {emitter} from "@/config.ts";
 import MainBar from "@/components/MainBar.vue";
 
-const question = "In the harbor’s glow, where music’s stacked,\n" +
-    "Who rocks the scene with rhythm packed?"
-const answer = "boysattheback"
+const question = "What’s the word, both bold and cheeky,\n" +
+    "That fits this egg, so small and sneaky?\n" +
+    "A playful trait, a little brassy—"
 const answerInput = ref("")
+const answer = "sassy"
 const video = ref<HTMLVideoElement>()
 const paused = ref<boolean>(true);
 const startup = ref<boolean>(true);
@@ -72,8 +80,7 @@ function onConfirm() {
     if (answerInput.value.toLowerCase() === answer) {
       localStorage.setItem("intro", "true");
       emitter.emit("changeMenu", "main");
-    }
-    else {
+    } else {
       audio.src = errorsfx;
       audio.play();
     }
