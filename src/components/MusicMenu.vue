@@ -76,7 +76,7 @@ const songs = [{text: "Rich baby daddy", cover: cover1}, {
   cover: cover6,
 },
   {
-    text: "Crushed balls",
+    text: "Surprise song",
     cover: secret_cover,
   }, {
     text: "Snow angel",
